@@ -1,4 +1,5 @@
 {
+  "namespace": "it.gestoreattivita.bff.rs.dto.attivita",
   "type": "record",
   "name": "InsertAttivitaRequestDto",
   "fields": [

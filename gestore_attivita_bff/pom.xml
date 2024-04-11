@@ -86,7 +86,7 @@
 						</goals>
 						<configuration>
 							<sourceDirectory>${project.basedir}/src/main/resources/avro</sourceDirectory>
-							<outputDirectory>src/main/java/it/gestoreattivita/bff/rs/dto</outputDirectory>
+							<outputDirectory>src/main/java/</outputDirectory>
 							<createBuilder>true</createBuilder>
 							<fieldVisibility>PRIVATE</fieldVisibility>
 							<builderFieldVisibility>PRIVATE</builderFieldVisibility>
