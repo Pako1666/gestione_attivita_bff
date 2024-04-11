@@ -12,6 +12,7 @@ import java.util.Map;
 @Slf4j
 public class GestioneAttivitaRestService {
 
+
     private RestTemplate restTemplate;
 
     private String baseUrl;

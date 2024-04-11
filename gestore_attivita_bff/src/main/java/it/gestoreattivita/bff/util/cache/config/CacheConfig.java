@@ -16,6 +16,7 @@ public class CacheConfig {
     @Value("${spring.cache.cache-names}")
     private String cacheName;
 
+
     @Bean
     public Cache gestoreAttivitaCache(){
         System.out.println("cache inizializzata");
