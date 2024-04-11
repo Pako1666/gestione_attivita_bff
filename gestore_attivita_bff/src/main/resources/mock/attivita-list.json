@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "alias": "a1",
+    "lavorata": true,
+    "attivitaPadre": null
+  },
+  {
+    "id": 2,
+    "alias": "a1",
+    "lavorata": true,
+    "attivitaPadre": 1
+  },
+  {
+    "id": 3,
+    "alias": "a1",
+    "lavorata": true,
+    "attivitaPadre": 2
+  },
+  {
+    "id": 4,
+    "alias": "a1",
+    "lavorata": true,
+    "attivitaPadre": 3
+  },
+  {
+    "id": 5,
+    "alias": "a1",
+    "lavorata": true,
+    "attivitaPadre": 4
+  },
+  {
+    "id": 6,
+    "alias": "a1",
+    "lavorata": true,
+    "attivitaPadre": 4
+  },
+  {
+    "id": 7,
+    "alias": "a1",
+    "lavorata": true,
+    "attivitaPadre": 6
+  },
+  {
+    "id": 8,
+    "alias": "a1",
+    "lavorata": true,
+    "attivitaPadre": 6
+  },
+  {
+    "id": 9,
+    "alias": "a1",
+    "lavorata": true,
+    "attivitaPadre": 8
+  },
+  {
+    "id": 10,
+    "alias": "a1",
+    "lavorata": true,
+    "attivitaPadre": 9
+  }
+]
