@@ -5,6 +5,6 @@
   "fields": [
     {"name": "idAttivita", "type": "long"},
     {"name": "lavorata", "type": "boolean"},
-    {"name": "message", "type": ["null", "string"], "default": null}
+    {"name": "message", "type": ["null", "string"], "default": null,"avro.java.string": "String"}
   ]
 }

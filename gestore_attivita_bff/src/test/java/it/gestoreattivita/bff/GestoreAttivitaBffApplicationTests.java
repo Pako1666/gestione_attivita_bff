@@ -6,6 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class GestoreAttivitaBffApplicationTests {
 
+
+
 	@Test
 	void contextLoads() {
 	}

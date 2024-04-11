@@ -3,7 +3,7 @@
   "type": "record",
   "name": "InsertAttivitaRequestDto",
   "fields": [
-    {"name": "alias", "type": "string"},
+    {"name": "alias", "type": "string","avro.java.string": "String"},
     {"name": "lavorata", "type": ["null", "string"], "default": null},
     {"name": "attivitaPadre", "type": ["null", "long"], "default": null}
   ]

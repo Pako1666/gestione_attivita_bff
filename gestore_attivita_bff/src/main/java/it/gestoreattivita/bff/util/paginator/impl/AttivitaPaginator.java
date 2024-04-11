@@ -1,16 +1,20 @@
 package it.gestoreattivita.bff.util.paginator.impl;
 
+import it.gestoreattivita.bff.rs.GestioneAttivitaRestService;
+import it.gestoreattivita.bff.rs.dto.attivita.AttivitaResponseDto;
 import it.gestoreattivita.bff.util.cache.CacheKeys;
 import it.gestoreattivita.bff.util.mock.MockDataService;
 import it.gestoreattivita.bff.util.paginator.AbstractPaginatorService;
-import it.gestoreattivita.bff.util.paginator.dto.PageDto;
 import it.gestoreattivita.bff.util.paginator.model.PageModel;
 import it.gestoreattivita.bff.v1.attivita.dto.AttivitaDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +26,30 @@ public class AttivitaPaginator extends AbstractPaginatorService<AttivitaDto> {
     @Autowired
     private MockDataService mockDataService;
 
+@Value("${bff.service.destinationServer}")
+    private String host;
+
+    private RestTemplate restTemplate = new RestTemplate();
 
     @Override
     public void fetchElements() {
         log.info("prelevazione dati");
-        List<AttivitaDto> datas = new ArrayList<>();
+        List<AttivitaResponseDto> restRes = restTemplate.exchange(
+                host+"/v1/attivita-api/all-attivita/",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<AttivitaResponseDto>>() {}
 
-        datas = mockDataService.serializeList("attivita-list.json");
+        ).getBody();
+
+
+        List<AttivitaDto> datas = restRes.stream().map(
+          x->AttivitaDto
+                  .builder()
+                  .id(x.getId())
+                  .alias(x.getAlias())
+                  .build()
+        ).toList();
 
         List<PageModel<AttivitaDto>> pages = new ArrayList<>();
         log.info("paginazione");
