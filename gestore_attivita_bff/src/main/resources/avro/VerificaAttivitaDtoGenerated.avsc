@@ -1,0 +1,8 @@
+{
+  "type": "record",
+  "name": "VerificaAttivitaDto",
+  "fields": [
+    {"name": "id", "type": "long"},
+    {"name": "lavorabile", "type": "boolean"}
+  ]
+}

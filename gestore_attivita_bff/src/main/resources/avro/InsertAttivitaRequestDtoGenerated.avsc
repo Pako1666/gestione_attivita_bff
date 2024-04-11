@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "InsertAttivitaRequestDto",
+  "fields": [
+    {"name": "alias", "type": "string"},
+    {"name": "lavorata", "type": ["null", "string"], "default": null},
+    {"name": "attivitaPadre", "type": ["null", "long"], "default": null}
+  ]
+}
