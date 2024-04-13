@@ -26,8 +26,8 @@ public class AttivitaPaginator extends AbstractPaginatorService<AttivitaDto> {
     @Autowired
     private MockDataService mockDataService;
 
-@Value("${bff.service.destinationServer}")
-    private String host;
+//@Value("${bff.service.destinationServer}")
+    private String host = "http://192.168.1.4:8080";
 
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -42,13 +42,14 @@ public class AttivitaPaginator extends AbstractPaginatorService<AttivitaDto> {
 
         ).getBody();
 
-
         List<AttivitaDto> datas = restRes.stream().map(
-          x->AttivitaDto
-                  .builder()
-                  .id(x.getId())
-                  .alias(x.getAlias())
-                  .build()
+                x -> AttivitaDto
+                        .builder()
+                        .id(x.getId())
+                        .attivitaPadre(x.getAttivitaPadre())
+                        .alias(x.getAlias())
+                        .lavorata(x.getLavorata())
+                        .build()
         ).toList();
 
         List<PageModel<AttivitaDto>> pages = new ArrayList<>();

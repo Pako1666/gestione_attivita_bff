@@ -8,5 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PageAttivitaResponseDto {
+
     Integer numPages;
+
 }
