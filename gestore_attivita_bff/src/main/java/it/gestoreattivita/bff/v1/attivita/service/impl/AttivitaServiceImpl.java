@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,13 +23,13 @@ public class AttivitaServiceImpl implements AttivitaService {
     @Autowired
     private AttivitaPaginator attivitaPaginator;
 
-    @Autowired
-    private CacheService cacheService;
+    /*@Autowired
+    private CacheService cacheService;*/
 
     @Override
     public PageAttivitaResponseDto init() {
         attivitaPaginator.fetchElements();
-        List<PageModel<AttivitaDto>> list = cacheService.get(CacheKeys.ATTIVITA_PAGES.name());
+        List<PageModel<AttivitaDto>> list = new ArrayList<>();
         PageAttivitaResponseDto dto = new PageAttivitaResponseDto();
         dto.setNumPages(list.size());
         return dto;

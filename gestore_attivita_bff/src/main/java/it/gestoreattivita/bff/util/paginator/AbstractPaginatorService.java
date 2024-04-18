@@ -14,8 +14,8 @@ public abstract class AbstractPaginatorService<T extends Serializable> {
 
     protected int itemsMaxPerPag = 3;
     protected int pagesNumber;
-    @Autowired
-    protected CacheService cacheService;
+    /*@Autowired
+    protected CacheService cacheService;*/
 
     /**
      *

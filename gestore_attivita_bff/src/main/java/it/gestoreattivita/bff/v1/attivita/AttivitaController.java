@@ -22,6 +22,8 @@ public class AttivitaController {
     private AttivitaService attivitaService;
 
 
+
+
     @Operation(operationId = "initAttivitaPages", summary = "inizializza il paginator delle attività")
     @GetMapping("init/")
     public ResponseEntity<PageAttivitaResponseDto> init(){
@@ -35,4 +37,6 @@ public class AttivitaController {
     public ResponseEntity<PageDto<AttivitaDto>> getPage(@PathVariable("index") Long i){
         return ResponseEntity.ok().body(attivitaService.getPage(i.longValue()));
     }
+
+
 }
