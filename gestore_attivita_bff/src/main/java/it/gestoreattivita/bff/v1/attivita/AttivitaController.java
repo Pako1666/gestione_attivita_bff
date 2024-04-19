@@ -33,7 +33,7 @@ public class AttivitaController {
     }
 
     @Operation(operationId = "getAttivitaPage", summary = "ottieni la pagina del paginator")
-    @GetMapping("init/{index}")
+    @GetMapping("pages/{index}")
     public ResponseEntity<PageDto<AttivitaDto>> getPage(@PathVariable("index") Long i){
         return ResponseEntity.ok().body(attivitaService.getPage(i.longValue()));
     }
