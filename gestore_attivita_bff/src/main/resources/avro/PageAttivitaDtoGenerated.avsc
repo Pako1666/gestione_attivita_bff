@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "PageAttivitaDto",
+  "namespace": "it.gestoreattivita.bff.rs.dto.attivita",
+  "fields": [
+    {"name": "page", "type": ["null", "int"], "default": null},
+    {"name": "items", "type": ["null", "int"], "default": null}
+  ]
+}

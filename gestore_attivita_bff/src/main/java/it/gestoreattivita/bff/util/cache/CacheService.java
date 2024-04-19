@@ -6,28 +6,30 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
 
 @Service
 public class CacheService {
 
+
     @Autowired
-    @Qualifier("gestoreAttivitaCache")
-    @Lazy
-    Cache cache;
+    private RedisTemplate<String, Serializable> redisTemplate;
 
-
-    public <T> T get(String key){
-        Cache.ValueWrapper value = cache.get(key);
-
-        return value!=null? (T) value.get(): null;
+    public Serializable get(String key){
+        Serializable e = redisTemplate.opsForValue().get(key);
+        return e;
     }
 
-    public <T> void insert(String key,T obj){
-        cache.put(key,obj);
+    public void insert(String key,Serializable e){
+        redisTemplate.opsForValue().set(key,e);
     }
 
     public void delete(String key){
-        cache.evict(key);
+        redisTemplate.opsForValue().getAndDelete(key);
     }
+
+
 }

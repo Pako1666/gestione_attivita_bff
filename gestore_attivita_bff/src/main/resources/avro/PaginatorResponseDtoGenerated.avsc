@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "PaginatorResponseDto",
+  "namespace": "it.gestoreattivita.bff.rs.dto.attivita",
+  "fields": [
+    {"name": "totalPages", "type": ["null", "int"], "default": null},
+    {"name": "totalElements", "type": ["null", "long"], "default": null}
+  ]
+}
