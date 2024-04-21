@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -68,7 +69,6 @@ public class AttivitaServiceImpl implements AttivitaService {
                     .getForEntity( API_HOST+"/v1/attivita-api/pages-info/"+this.NUM_ITMES_X_PAGE, PaginatorResponseDto.class)
                     .getBody();
             dto.setNumPages(paginatorResponse.getTotalPages());
-            dto.setNumPages(paginatorResponse.getTotalPages());
 
             cacheService.insert(CacheKeys.INIT_PAGE.name(), dto);
         }
@@ -77,7 +77,68 @@ public class AttivitaServiceImpl implements AttivitaService {
 
     @Override
     public PageDto<AttivitaDto> getPage(Long index) {
-        return null;
+
+        PageDto<AttivitaDto> page = new PageDto<>();
+        List<PageModel<AttivitaModel>> pages = (List<PageModel<AttivitaModel>>) cacheService.get(CacheKeys.ATTIVITA_PAGES.name());
+        if(pages!=null){
+
+            PageModel<AttivitaModel> model = pages.stream()
+                    .filter(p -> p.getIndex().equals(index))
+                    .findFirst()
+                    .orElse(null);
+
+            if(model==null){
+                model = new PageModel<>();
+                model.setIndex(index.intValue());
+
+                Integer i = 1;
+                HttpEntity<PageAttivitaDto> req = new HttpEntity<>(new PageAttivitaDto(index.intValue(), NUM_ITMES_X_PAGE));
+
+                List<AttivitaResponseDto> res = restTemplate.exchange(
+                        API_HOST+"/v1/attivita-api/all-attivita",
+                        HttpMethod.POST,
+                        req,
+                        new ParameterizedTypeReference<List<AttivitaResponseDto>>() {}
+                ).getBody();
+
+                model.setItems(
+                        res.stream().map(
+                                e->AttivitaModel
+                                        .builder()
+                                        .id(e.getId())
+                                        .alias(e.getAlias())
+                                        .attivitaPadre(e.getAttivitaPadre())
+                                        .lavorata(e.getLavorata())
+                                        .build()
+                        ).toList()
+                );
+
+                pages.add(model);
+                cacheService.insert(CacheKeys.ATTIVITA_PAGES.name(), (Serializable) pages);
+            }
+
+
+
+            page.setItems(model.getItems().stream().map(
+                    e->AttivitaDto
+                            .builder()
+                            .id(e.getId())
+                            .alias(e.getAlias())
+                            .lavorata(e.getLavorata())
+                            .attivitaPadre(e.getAttivitaPadre())
+                            .build()
+            )
+                    .toList());
+
+        }
+
+
+
+
+
+
+
+        return page;
     }
 
     @Override
